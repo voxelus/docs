@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: Voxelus API Reference
 
 language_tabs:
   - shell
