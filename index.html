@@ -13,7 +13,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["shell","ruby","python"]);
+          setupLanguages(["shell"]);
         });
       </script>
   </head>
@@ -29,8 +29,6 @@
       <img src="images/logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -47,10 +45,21 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="introduction">Introduction</h1>
+<pre class="highlight plaintext"><code>  _          _ _
+ | |__   ___| | | ___
+ | '_ \ / _ \ | |/ _ \
+ | | | |  __/ | | (_) |
+ |_| |_|\___|_|_|\___/     _
+ __      _____  _ __| | __| |
+ \ \ /\ / / _ \| '__| |/ _` |
+  \ V  V / (_) | |  | | (_| |
+   \_/\_/ \___/|_|  |_|\__,_|
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+</code></pre>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>Welcome to the Voxelus API! You can use our API to access Voxelus API endpoints, which can get information from our database.</p>
+
+<p>We have language bindings in Shell! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
 <p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
 
@@ -59,48 +68,302 @@
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
 <pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+  -H <span class="s2">"X-Access-Token: foobar"</span>
 </code></pre>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+<p>Make sure to replace <code class="prettyprint">foobar</code> with your API key.</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Voxelus uses API keys to allow access to the API. You can register a new Voxelus API key at our <a href="http://www.voxelus.com/">website</a>.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>Voxelus expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
 
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<p><code class="prettyprint">X-Access-Token: 76740eeda4a55ec9632ae73429fd545f</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>foobar</code> with your personal API key.
 </aside>
+
+<h1 id="auth">Auth</h1>
+<pre class="highlight plaintext"><code>                  ._,.
+            ."..-..pf
+            -L   ..#'
+          .+_L  ."]#
+          ,'j' .+.j`                 -'.__..,.,p.
+         _~ #..&lt;..0.                 .J-.``..._f.
+        .7..#_.. _f.                .....-..,`4'
+        ;` ,#j.  T'      ..         ..J....,'.j`
+       .` .."^.,-0.,,,,yMMMMM,.    ,-.J...+`.j@
+      .'.`...' .yMMMMM0M@^=`""g.. .'..J..".'.jH
+      j' .'1`  q'^)@@#"^".`"='BNg_...,]_)'...0-
+     .T ...I. j"    .'..+,_.'3#MMM0MggCBf....F.
+     j/.+'.{..+       `^~'-^~~""""'"""?'"``'1`
+     .... .y.}                  `.._-:`_...jf
+     g-.  .Lg'                 ..,..'-....,'.
+    .'.   .Y^                  .....',].._f
+    ......-f.                 .-,,.,.-:--&amp;`
+                              .`...'..`_J`
+                              .~......'#'  May the Force be with you.
+                              '..,,.,_]`
+                              .L..`..``.
+</code></pre>
+
+<h2 id="signup">Signup</h2>
+<pre class="highlight shell"><code>curl -X POST --include <span class="s2">"https://voxelus.herokuapp.com/v1/auth/signup"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{"username":"foobar","password":"leave_britney_alone","email":"foo@bar.com"}'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="s2">"3858f62230ac3c915f300c664312c63f"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint registers a new user</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">POST /v1/auth/signup</code></p>
+
+<h3 id="default-parameters">Default Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>String</td>
+<td>The user’s username; it must be unique.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>The user’s email; it must be unique.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>The user’s password; it’s encrypted and never returned within the API response.</td>
+</tr>
+</tbody></table>
+
+<h2 id="login">Login</h2>
+<pre class="highlight shell"><code>curl -X POST --include <span class="s2">"https://voxelus.herokuapp.com/v1/auth/login"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{"username":"foobar","password":"leave_britney_alone"}'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="s2">"3858f62230ac3c915f300c664312c63f"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint logins an user</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">POST /v1/auth/login</code></p>
+
+<h3 id="default-parameters">Default Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>String</td>
+<td>The user’s username.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>The user’s password.</td>
+</tr>
+</tbody></table>
+
+<h1 id="users">Users</h1>
+<pre class="highlight plaintext"><code>∩( ・ω・)∩
+</code></pre>
+
+<h2 id="me">Me</h2>
+<pre class="highlight shell"><code>curl -X GET --include <span class="s2">"https://voxelus.herokuapp.com/v1/users/me"</span> <span class="se">\</span>
+-H <span class="s2">"X-Access-Token: 76740eeda4a55ec9632ae73429fd545f"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foobar"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-04T22:55:14.659Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"gravatar"</span><span class="p">:</span><span class="s2">"f3ada405ce890b6f8204094deb12d8a8"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Returns personal data.</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">GET /v1/users/me</code></p>
+
+<h1 id="worlds">Worlds</h1>
+<pre class="highlight plaintext"><code>            _____
+        ,-:` \;',`'-,
+      .'-;_,;  ':-;_,'.
+     /;   '/    ,  _`.-\
+    | '`. (`     /` ` \`|
+    |:.  `\`-.   \_   / |
+    |     (   `,  .`\ ;'|
+     \     | .'     `-'/
+      `.   ;/        .'
+    jgs `'-._____.-'`
+</code></pre>
+
+<h2 id="list-all-worlds">List all worlds</h2>
+<pre class="highlight shell"><code>curl -X GET --include <span class="s2">"https://voxelus.herokuapp.com/v1/worlds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-04T20:00:02Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-04T20:00:02Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-04T20:00:02Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-04T20:00:02Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-04T20:00:01Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="s2">"2015-05-04T20:00:01Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Returns a list of worlds.</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">GET /v1/worlds</code></p>
+
+<h2 id="creating-a-world">Creating a world</h2>
+<pre class="highlight shell"><code>curl -X POST --include <span class="s2">"https://voxelus.herokuapp.com/v1/worlds"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"X-Access-Token: 76740eeda4a55ec9632ae73429fd545f"</span> <span class="se">\</span>
+-d <span class="s1">'{"title":"foo","description":"bar"}'</span>
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="s2">"title"</span><span class="p">:</span><span class="s2">"foo"</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint creates a new world.</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">POST /v1/worlds</code></p>
+
+<h3 id="default-parameters">Default Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>The world’s title.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>The world’s descriptionl.</td>
+</tr>
+</tbody></table>
+
+<h2 id="retrieving-an-existing">Retrieving an existing</h2>
+<pre class="highlight shell"><code>curl -X GET --include <span class="s2">"https://voxelus.herokuapp.com/v1/worlds/1"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="s2">"title"</span><span class="p">:</span><span class="s2">"foo"</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Retrieves the details of an existing world.</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">GET /v1/worlds/:world_id</code></p>
+
+<h3 id="default-parameters">Default Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>world_id</td>
+<td>Int</td>
+<td>The identifier of the user to be retrieved.</td>
+</tr>
+</tbody></table>
+
+<h2 id="deleting-a-world">Deleting a world</h2>
+<pre class="highlight shell"><code>curl -X DELETE --include <span class="s2">"https://voxelus.herokuapp.com/v1/worlds/1"</span> <span class="se">\</span>
+-H <span class="s2">"X-Access-Token: 76740eeda4a55ec9632ae73429fd545f"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"destroy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h1 id="uploads">Uploads</h1>
 
 <h1 id="kittens">Kittens</h1>
 
 <h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
 <pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+  -H <span class="s2">"X-Access-Token: foobar"</span>
 </code></pre>
 
 <blockquote>
@@ -156,18 +419,8 @@ Remember — a happy kitten is an authenticated kitten!
 </aside>
 
 <h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
 <pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/3"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+  -H <span class="s2">"X-Access-Token: foobar"</span>
 </code></pre>
 
 <blockquote>
@@ -245,10 +498,6 @@ Remember — a happy kitten is an authenticated kitten!
 <td>Gone &ndash; The kitten requested has been removed from our servers</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
 <td>429</td>
 <td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
 </tr>
@@ -266,8 +515,6 @@ Remember — a happy kitten is an authenticated kitten!
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
