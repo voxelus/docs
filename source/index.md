@@ -225,14 +225,49 @@ Returns a list of worlds.
 curl -X POST --include "https://voxelus.herokuapp.com/v1/worlds" \
 -H "Content-Type: application/json" \
 -H "X-Access-Token: 76740eeda4a55ec9632ae73429fd545f" \
--d '{"title":"foo","description":"bar"}'
+-d '{"title":"foo","description":"bar","images":["043111ad-0994-4d05-a3b0-c4273f7a3e5f","c7c83710-b4aa-4a70-953f-9debf229e794"],"atmos":["e94f6924-5d94-4fbd-88a0-cc681bc7917d"]}'
 
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-{"title":"foo"}
+[
+  {
+    "id":47
+    "title":"foo",
+    "description":"bar",
+    "owner":[
+      {
+      "username":"foobar"
+      }
+    ],
+    "images":[
+      {
+      "sid":"043111ad-0994-4d05-a3b0-c4273f7a3e5f",
+      "image":{"url":"http://assets.voxelus.com/images/7/9454862341-dcefa385-0124-41d2-8d12-2a2572e2adc1.png"},
+      "mime":"image/png",
+      "size":8018
+      },
+      {
+      "sid":"c7c83710-b4aa-4a70-953f-9debf229e794",
+      "image":{"url":"http://assets.voxelus.com/images/11/0543862341-2eccf2ab-2f5d-49fb-aa63-68e3c806d2ed.png"},
+      "mime":"image/png",
+      "size":5243
+      }
+    ],
+	"atmos":[
+      {
+      "sid":"e94f6924-5d94-4fbd-88a0-cc681bc7917d",
+      "image":{"url":"http://assets.voxelus.com/atmos/434/8224862341-0cd0cab0-e217-4db5-be53-23f2df64ae4a.atmo"},
+      "mime":"image/png",
+      "size":34732
+      }
+    ]
+    "created_at":"2015-05-26T23:56:12Z",
+    "updated_at":"2015-05-26T23:56:12Z"
+  }
+]
 ```
 
 This endpoint creates a new world.
@@ -286,6 +321,79 @@ curl -X DELETE --include "https://voxelus.herokuapp.com/v1/worlds/1" \
 ```
 
 # Uploads
+```
+,'";-------------------;"`.
+;[]; ................. ;[];
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  `.                 ,'  ;
+;    """""""""""""""""    ;
+;    ,-------------.---.  ;
+;    ;  ;"";       ;   ;  ;
+;    ;  ;  ;       ;   ;  ;
+;    ;  ;  ;       ;   ;  ;
+;//||;  ;  ;       ;   ;||;
+;\\||;  ;__;       ;   ;\/;
+ `. _;          _  ;  _;  ;
+   " """"""""""" """"" """
+```
+
+## Upload a new Image
+
+```
+curl -X POST --include "https://voxelus.herokuapp.com/v1/uploads/image" \
+-H "X-Access-Token: 76740eeda4a55ec9632ae73429fd545f" \
+-F 'image=@voxelus.png'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id":"0e9d9b51-58e8-4430-8db9-b6ac741734d1",
+    "image":"http://assets.voxelus.com/images/9/5475862341-7460e52e-9be1-45f6-badc-234ddd693d0f.png",
+    "size":8018
+  }
+]
+```
+
+Upload a new image
+
+### HTTP REQUEST
+
+`POST /v1/uploads/image`
+
+## Upload a new Atmo
+
+```
+curl -X POST --include "https://voxelus.herokuapp.com/v1/uploads/atmo" \
+-H "X-Access-Token: 76740eeda4a55ec9632ae73429fd545f" \
+-F 'atmo=@voxelus.atmo'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id":"0e9d9b51-58e8-4430-8db9-b6ac741734d1",
+    "atmo":"http://assets.voxelus.com/images/9/5475862341-7460e52e-9be1-45f6-badc-234ddd693d0f.png",
+    "size":8018
+  }
+]
+```
+
+Upload a new atmo
+
+### HTTP REQUEST
+
+`POST /v1/uploads/atmo`
+
 
 # Kittens
 
