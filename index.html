@@ -275,14 +275,49 @@ You must replace <code>foobar</code> with your personal API key.
 <pre class="highlight shell"><code>curl -X POST --include <span class="s2">"https://voxelus.herokuapp.com/v1/worlds"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"X-Access-Token: 76740eeda4a55ec9632ae73429fd545f"</span> <span class="se">\</span>
--d <span class="s1">'{"title":"foo","description":"bar"}'</span>
+-d <span class="s1">'{"title":"foo","description":"bar","images":["043111ad-0994-4d05-a3b0-c4273f7a3e5f","c7c83710-b4aa-4a70-953f-9debf229e794"],"atmos":["e94f6924-5d94-4fbd-88a0-cc681bc7917d"]}'</span>
 
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="s2">"title"</span><span class="p">:</span><span class="s2">"foo"</span><span class="p">}</span><span class="w">
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">47</span><span class="w">
+    </span><span class="s2">"title"</span><span class="err">:</span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"bar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"owner"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"username"</span><span class="p">:</span><span class="s2">"foobar"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"images"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"sid"</span><span class="p">:</span><span class="s2">"043111ad-0994-4d05-a3b0-c4273f7a3e5f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"image"</span><span class="p">:{</span><span class="s2">"url"</span><span class="p">:</span><span class="s2">"http://assets.voxelus.com/images/7/9454862341-dcefa385-0124-41d2-8d12-2a2572e2adc1.png"</span><span class="p">},</span><span class="w">
+      </span><span class="s2">"mime"</span><span class="p">:</span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"size"</span><span class="p">:</span><span class="mi">8018</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"sid"</span><span class="p">:</span><span class="s2">"c7c83710-b4aa-4a70-953f-9debf229e794"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"image"</span><span class="p">:{</span><span class="s2">"url"</span><span class="p">:</span><span class="s2">"http://assets.voxelus.com/images/11/0543862341-2eccf2ab-2f5d-49fb-aa63-68e3c806d2ed.png"</span><span class="p">},</span><span class="w">
+      </span><span class="s2">"mime"</span><span class="p">:</span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"size"</span><span class="p">:</span><span class="mi">5243</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"atmos"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"sid"</span><span class="p">:</span><span class="s2">"e94f6924-5d94-4fbd-88a0-cc681bc7917d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"image"</span><span class="p">:{</span><span class="s2">"url"</span><span class="p">:</span><span class="s2">"http://assets.voxelus.com/atmos/434/8224862341-0cd0cab0-e217-4db5-be53-23f2df64ae4a.atmo"</span><span class="p">},</span><span class="w">
+      </span><span class="s2">"mime"</span><span class="p">:</span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"size"</span><span class="p">:</span><span class="mi">34732</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="err">:</span><span class="s2">"2015-05-26T23:56:12Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="s2">"2015-05-26T23:56:12Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
 
 <p>This endpoint creates a new world.</p>
@@ -358,6 +393,73 @@ You must replace <code>foobar</code> with your personal API key.
 </span></code></pre>
 
 <h1 id="uploads">Uploads</h1>
+<pre class="highlight plaintext"><code>,'";-------------------;"`.
+;[]; ................. ;[];
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  ; ................. ;  ;
+;  `.                 ,'  ;
+;    """""""""""""""""    ;
+;    ,-------------.---.  ;
+;    ;  ;"";       ;   ;  ;
+;    ;  ;  ;       ;   ;  ;
+;    ;  ;  ;       ;   ;  ;
+;//||;  ;  ;       ;   ;||;
+;\\||;  ;__;       ;   ;\/;
+ `. _;          _  ;  _;  ;
+   " """"""""""" """"" """
+</code></pre>
+
+<h2 id="upload-a-new-image">Upload a new Image</h2>
+<pre class="highlight plaintext"><code>curl -X POST --include "https://voxelus.herokuapp.com/v1/uploads/image" \
+-H "X-Access-Token: 76740eeda4a55ec9632ae73429fd545f" \
+-F 'image=@voxelus.png'
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"0e9d9b51-58e8-4430-8db9-b6ac741734d1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://assets.voxelus.com/images/9/5475862341-7460e52e-9be1-45f6-badc-234ddd693d0f.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"size"</span><span class="p">:</span><span class="mi">8018</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Upload a new image</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">POST /v1/uploads/image</code></p>
+
+<h2 id="upload-a-new-atmo">Upload a new Atmo</h2>
+<pre class="highlight plaintext"><code>curl -X POST --include "https://voxelus.herokuapp.com/v1/uploads/atmo" \
+-H "X-Access-Token: 76740eeda4a55ec9632ae73429fd545f" \
+-F 'atmo=@voxelus.atmo'
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"0e9d9b51-58e8-4430-8db9-b6ac741734d1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"atmo"</span><span class="p">:</span><span class="s2">"http://assets.voxelus.com/images/9/5475862341-7460e52e-9be1-45f6-badc-234ddd693d0f.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"size"</span><span class="p">:</span><span class="mi">8018</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Upload a new atmo</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">POST /v1/uploads/atmo</code></p>
 
 <h1 id="kittens">Kittens</h1>
 
