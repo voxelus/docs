@@ -198,6 +198,83 @@ You must replace <code>foobar</code> with your personal API key.
 </tr>
 </tbody></table>
 
+<h2 id="forgot-password">Forgot password</h2>
+<pre class="highlight shell"><code>curl -X POST --include <span class="s2">"https://voxelus.herokuapp.com/v1/auth/forgotpw"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{"email":"foo@bar.com"}'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint send an email with a temporay key for later use on resetpw endpoint</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">POST /v1/auth/forgotpw</code></p>
+
+<h3 id="default-parameters">Default Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>The user’s email.</td>
+</tr>
+</tbody></table>
+
+<h2 id="reset-password">Reset password</h2>
+<pre class="highlight shell"><code>curl -X POST --include <span class="s2">"https://voxelus.herokuapp.com/v1/auth/resetpw"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{"otp":"2.CSONNW.cpQWERTYAZERTWERPO_iFE44","password":"L3av3_britn3y_al0n3"}'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Resets user&rsquo;s password</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">POST /v1/auth/resetpw</code></p>
+
+<h3 id="default-parameters">Default Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>otp</td>
+<td>String</td>
+<td>OTP.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>The new password, optional.</td>
+</tr>
+</tbody></table>
+
 <h1 id="users">Users</h1>
 <pre class="highlight plaintext"><code>∩( ・ω・)∩
 </code></pre>
