@@ -140,6 +140,63 @@ Name | Type | Description
 username|String|The user’s username.
 password|String|The user’s password.
 
+## Forgot password
+
+```shell
+curl -X POST --include "https://voxelus.herokuapp.com/v1/auth/forgotpw" \
+-H "Content-Type: application/json" \
+-d '{"email":"foo@bar.com"}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "token":"ok"
+}
+```
+
+This endpoint send an email with a temporay key for later use on resetpw endpoint
+
+### HTTP REQUEST
+
+`POST /v1/auth/forgotpw`
+
+### Default Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+email|String|The user’s email.
+
+## Reset password
+
+```shell
+curl -X POST --include "https://voxelus.herokuapp.com/v1/auth/resetpw" \
+-H "Content-Type: application/json" \
+-d '{"otp":"2.CSONNW.cpQWERTYAZERTWERPO_iFE44","password":"L3av3_britn3y_al0n3"}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "token":"ok"
+}
+```
+
+Resets user's password
+
+### HTTP REQUEST
+
+`POST /v1/auth/resetpw`
+
+### Default Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+otp|String|OTP.
+password|String|The new password, optional.
+
 # Users
 ```
 ∩( ・ω・)∩
